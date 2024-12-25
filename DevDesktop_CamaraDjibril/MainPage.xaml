@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DevDesktop_CamaraDjibril"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             x:Class="DevDesktop_CamaraDjibril.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <VerticalStackLayout>
+            <Frame Padding="0" BackgroundColor="Black" HeightRequest="500">
+                <sf:SfListView x:Name="listViewPopularFilms" ItemSpacing="35" ItemSize="185" ItemsSource="{Binding PopularFilms}" Orientation="Horizontal" AutoFitMode="Height">
+                    <sf:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                            <Image Grid.Row="0" Source="{Binding poster_path}" Aspect="AspectFill"/>
+                            <Label Grid.Row="1" Text="{Binding title}" FontSize="20" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" Opacity="0.7"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                    </sf:SfListView.ItemTemplate>
+                </sf:SfListView>
+            </Frame>
+            <Frame Padding="0" BackgroundColor="Black" HeightRequest="500">
+                <sf:SfListView x:Name="listViewPopularFilms2" ItemSpacing="35" ItemSize="185" ItemsSource="{Binding PopularFilms}" Orientation="Horizontal" AutoFitMode="Height">
+                    <sf:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                            <Image Grid.Row="0" Source="{Binding poster_path}" Aspect="AspectFill"/>
+                            <Label Grid.Row="1" Text="{Binding title}" FontSize="20" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Black" Opacity="0.7"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                    </sf:SfListView.ItemTemplate>
+                </sf:SfListView>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
