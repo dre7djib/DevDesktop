@@ -67,6 +67,27 @@ public class FilmsService
         }
     }
 
+    public static async Task<string> GetTopRatedFilms()
+    {
+        var client = new HttpClient();
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("https://api.themoviedb.org/3/movie/top_rated?language=fr-FR"),
+            Headers =
+            {
+                { "accept", "application/json" },
+                { "Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMDE5MzYxMzdkOTA1MjgzOThiMDU4M2UwMDQwYmMwZSIsIm5iZiI6MTczMTYxODQ0MS4zOTEzMTIsInN1YiI6IjY3MWI0ZjUwYzc4MDJjYzUwMzU5Zjg3ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YbLf7GEyJcxIyXSebFrjmDjwxygbGBrCvdHQTUER4tI" },
+            },
+        };
+        using (var response = await client.SendAsync(request))
+        {
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+            return body;
+        }
+    }
+
     public static async Task<string> GetSearchFilms(string query)
     {
         var client = new HttpClient();
