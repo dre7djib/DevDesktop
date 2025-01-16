@@ -4,10 +4,10 @@ using MySql.Data.MySqlClient;
 using System.Text.Json;
 using Data;
 using DevDesktop_CamaraDjibril.Repositories;
+using System.Diagnostics;
 
 public class WatchedService()
 {
-    // Récupération des films Watched
     public string GetWatched(string id, ref string response_json, DBConnection db)
     {
         try
@@ -41,17 +41,16 @@ public class WatchedService()
         }
     }
 
-    // R@cupération de tous les films Watched
     public string GetAllWatched(ref string response_json, DBConnection db)
     {
         try
         {
             MySqlCommand command = new MySqlCommand("SELECT * FROM ta_watched", db.Connection);
-            WatchedRepository watched = new WatchedRepository();
             List<WatchedRepository> watcheds = new List<WatchedRepository>();
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
+                WatchedRepository watched = new WatchedRepository();
                 watched.idWatched = reader.GetInt32(0);
                 watched.idUser = reader.GetInt32(1);
                 watched.idFilm = reader.GetInt32(2);
@@ -70,9 +69,9 @@ public class WatchedService()
         }
     }
 
-    // Ajout d'un film Watched
     public string SetWatched(int idUser, int idFilm, int idRating, DateTime Date, ref string response_json, DBConnection db)
     {
+        Debug.WriteLine("idUser: " + idUser);
         try
         {
             MySqlCommand command = new MySqlCommand("INSERT INTO ta_watched (idUser, idFilm, idRating, Date) VALUES (@idUser, @idFilm, @idRating, @Date)", db.Connection);

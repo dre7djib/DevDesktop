@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DevDesktop_CamaraDjibril"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
              x:Class="DevDesktop_CamaraDjibril.Pages.DetailFilmPage">
-    <VerticalStackLayout Padding="20" Spacing="15">
-        <Image Source="{Binding poster_path}" Aspect="AspectFill" HeightRequest="300"/>
-        <Label Text="{Binding title}" FontSize="24" FontAttributes="Bold" TextColor="Black"/>
-        <Label Text="{Binding description}" FontSize="16" TextColor="Gray"/>
-        <Label Text="{Binding id}" FontSize="16" TextColor="Gray"/>
-    </VerticalStackLayout>
+       <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,Auto,*" ColumnDefinitions="2*,3*">
+              <Image Grid.RowSpan="2" Grid.Column="0" Source="{Binding Film.poster_path}" 
+                     Aspect="AspectFill" HeightRequest="750" WidthRequest="500"/>
+
+              <Label Grid.Column="1" Text="{Binding Film.title}" 
+                     FontSize="50" FontAttributes="Bold" TextColor="White" 
+                     VerticalOptions="Start" HorizontalOptions="Start" Margin="10,0,0,0"/>
+
+              <Label Grid.Row="1" Grid.Column="1" Text="{Binding Film.overview}" 
+                     FontSize="14" TextColor="LightGray" 
+                     VerticalOptions="Start"
+                     Margin="10,5,0,0"/>
+
+              <StackLayout Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,20,0,0">
+              <Label Text="{Binding Film.release_date}" FontSize="12" TextColor="Gray"/>
+              <Label Text="{Binding Film.popularity}" FontSize="12" TextColor="Gray"/>
+              </StackLayout>
+
+              <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Add to Watched Films" 
+              Command="{Binding AddWatchedFilm}"
+              CommandParameter="{Binding Film}" 
+              VerticalOptions="End" HorizontalOptions="Center" Margin="0,20,0,0"/>
+              <Button Text="Test Command" Command="{Binding AddWatchedFilmWithoutParam}" />
+
+       </Grid>
 </ContentPage>

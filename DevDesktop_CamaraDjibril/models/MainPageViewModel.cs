@@ -4,6 +4,8 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using DevDesktop_CamaraDjibril.Repositories;
 using DevDesktop_CamaraDjibril.Pages;
+using DevDesktop_CamaraDjibril.Mapper;
+using FilmDataRepository;
 
 namespace DevDesktop_CamaraDjibril
 {
@@ -12,7 +14,7 @@ namespace DevDesktop_CamaraDjibril
         public ObservableCollection<Film> PopularFilms { get; set; }
         public ObservableCollection<Film> UpcomingFilms { get; set; }
         public ObservableCollection<Film> TopRatedFilms { get; set; }
-        public Command<Film> NavigateToDetailsCommand { get; }
+        public Command<Film> NavigateToDetailsFilms { get; }
 
         public MainPageViewModel()
         {
@@ -23,9 +25,10 @@ namespace DevDesktop_CamaraDjibril
             TopRatedFilms = new ObservableCollection<Film>();
             LoadTopRatedFilms();
 
-            NavigateToDetailsCommand = new Command<Film>(film =>
+            NavigateToDetailsFilms = new Command<Film>(film =>
             {
-                Application.Current.MainPage.Navigation.PushAsync(new DetailFilmPage(film));
+                FilmById filmById = Mapper.FilmByIdMapper.Map(film);
+                Application.Current.MainPage.Navigation.PushAsync(new DetailFilmPage(filmById));
             });
         }
 
@@ -35,10 +38,10 @@ namespace DevDesktop_CamaraDjibril
             var films = JsonSerializer.Deserialize<FilmResponse>(filmsJson);
             foreach (var film in films.results)
             {
-                film.poster_path = "https://image.tmdb.org/t/p/w185" + film.poster_path;
-                if (film.poster_path == "https://image.tmdb.org/t/p/w185null")
+                film.poster_path = "https://image.tmdb.org/t/p/w500" + film.poster_path;
+                if (film.poster_path == "https://image.tmdb.org/t/p/w500null")
                 {
-                    film.poster_path = "https://image.tmdb.org/t/p/w185" + film.backdrop_path;
+                    film.poster_path = "https://image.tmdb.org/t/p/w500" + film.backdrop_path;
                 }
                 PopularFilms.Add(film);
             }
@@ -49,10 +52,10 @@ namespace DevDesktop_CamaraDjibril
             var films = JsonSerializer.Deserialize<FilmResponse>(filmsJson);
             foreach (var film in films.results)
             {
-                film.poster_path = "https://image.tmdb.org/t/p/w185" + film.poster_path;
-                if (film.poster_path == "https://image.tmdb.org/t/p/w185null")
+                film.poster_path = "https://image.tmdb.org/t/p/w500" + film.poster_path;
+                if (film.poster_path == "https://image.tmdb.org/t/p/w500null")
                 {
-                    film.poster_path = "https://image.tmdb.org/t/p/w185" + film.backdrop_path;
+                    film.poster_path = "https://image.tmdb.org/t/p/w500" + film.backdrop_path;
                 }
                 UpcomingFilms.Add(film);
             }
@@ -64,10 +67,10 @@ namespace DevDesktop_CamaraDjibril
             var films = JsonSerializer.Deserialize<FilmResponse>(filmsJson);
             foreach (var film in films.results)
             {
-                film.poster_path = "https://image.tmdb.org/t/p/w185" + film.poster_path;
-                if (film.poster_path == "https://image.tmdb.org/t/p/w185null")
+                film.poster_path = "https://image.tmdb.org/t/p/w500" + film.poster_path;
+                if (film.poster_path == "https://image.tmdb.org/t/p/w500null")
                 {
-                    film.poster_path = "https://image.tmdb.org/t/p/w185" + film.backdrop_path;
+                    film.poster_path = "https://image.tmdb.org/t/p/w500" + film.backdrop_path;
                 }
                 TopRatedFilms.Add(film);
             }

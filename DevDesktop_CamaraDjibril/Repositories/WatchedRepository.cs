@@ -8,4 +8,5 @@ namespace DevDesktop_CamaraDjibril.Repositories
         public int idRating { get; set; }
         public DateTime Date { get; set; }
     }
+
 }
