@@ -17,4 +17,9 @@
         ContentTemplate="{DataTemplate local:Pages.WatchedFilmsPage}"
         Route="WatchedFilmsPage" />
 
+    <ShellContent
+        Title="Search Films"
+        ContentTemplate="{DataTemplate local:Pages.SearchFilmPage}"
+        Route="SearchFilmPage" />
+
 </Shell>
